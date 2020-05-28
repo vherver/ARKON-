@@ -1,0 +1,16 @@
+asgiref==3.2.7
+certifi==2020.4.5.1
+chardet==3.0.4
+Django==3.0.6
+django-restframework==0.0.1
+djangorestframework==3.11.0
+geographiclib==1.50
+geopy==1.22.0
+idna==2.9
+numpy==1.18.4
+pytz==2020.1
+requests==2.23.0
+reverse-geocoder==1.5.1
+scipy==1.4.1
+sqlparse==0.3.1
+urllib3==1.25.9

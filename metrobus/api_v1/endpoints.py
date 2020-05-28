@@ -4,7 +4,8 @@ from django.db import transaction
 
 
 from metrobus.models import UpdateInformation, MetrobusUnitInformation
-from metrobus.serializaers import InformationSerializer, UnitSerializer, DisponiblesSerializer
+from metrobus.serializaers import InformationSerializer, UnitSerializer, \
+    DisponiblesSerializer, InfoUnitSerializer, AlcaldiaSerializer, AlcaldiaUnitSerializer
 from Arkon.paginator import Paginator
 
 
@@ -94,9 +95,36 @@ class GetRemoteInfo(generics.GenericAPIView):
 
 
 
-class MetrobusDisponibles(generics.ListCreateAPIView):
+class MetrobusDisponibles(generics.ListAPIView):
     serializer_class = DisponiblesSerializer
     pagination_class = Paginator
-    queryset = MetrobusUnitInformation.objects.all()
+    queryset = MetrobusUnitInformation.objects.all().values('vehicle_id').distinct().order_by('vehicle_id')
 
 
+class InfoUnit(generics.ListAPIView):
+    serializer_class = InfoUnitSerializer
+    pagination_class = Paginator
+
+    def get_queryset(self):
+        queryset = MetrobusUnitInformation.objects.filter(vehicle_id=self.kwargs['unit_id'])\
+            .order_by('-information_date__information_date')
+        return queryset
+
+
+class Alcaldias(generics.ListAPIView):
+    serializer_class = AlcaldiaSerializer
+    pagination_class = Paginator
+
+    def get_queryset(self):
+        queryset = MetrobusUnitInformation.objects.all().values('alcaldia').distinct().order_by("-alcaldia")
+        return queryset
+
+
+class AlcaldiasUnit(generics.ListAPIView):
+    serializer_class = AlcaldiaUnitSerializer
+    pagination_class = Paginator
+
+    def get_queryset(self):
+        queryset = MetrobusUnitInformation.objects.filter(alcaldia=self.kwargs['alcaldia_id'])\
+            .order_by('-information_date__information_date')
+        return queryset
