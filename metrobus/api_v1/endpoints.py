@@ -20,6 +20,10 @@ utc=pytz.UTC
 
 class GetRemoteInfo(generics.GenericAPIView):
 
+    """
+    Clase Generica para obtener la informacion extraida del API del metrobus
+    """
+
     def get(self, request):
 
         url = "https://datos.cdmx.gob.mx/api/records/1.0/search/?dataset=prueba_fetchdata_metrobus&q=&rows=1"
@@ -96,12 +100,20 @@ class GetRemoteInfo(generics.GenericAPIView):
 
 
 class MetrobusDisponibles(generics.ListAPIView):
+
+    """
+    Clase que consulta las unidades de metrobus que se encuentran en la ciudad de mexico
+    """
+
     serializer_class = DisponiblesSerializer
     pagination_class = Paginator
     queryset = MetrobusUnitInformation.objects.all().values('vehicle_id').distinct().order_by('vehicle_id')
 
 
 class InfoUnit(generics.ListAPIView):
+    """
+    Clase que consulta la informacion especifica de una unidad, trae todos los registros de ella
+    """
     serializer_class = InfoUnitSerializer
     pagination_class = Paginator
 
@@ -112,6 +124,9 @@ class InfoUnit(generics.ListAPIView):
 
 
 class Alcaldias(generics.ListAPIView):
+    """
+    Clase que consulta todas las alcaldias que tengan algun registro
+    """
     serializer_class = AlcaldiaSerializer
     pagination_class = Paginator
 
@@ -121,6 +136,9 @@ class Alcaldias(generics.ListAPIView):
 
 
 class AlcaldiasUnit(generics.ListAPIView):
+    """
+    Clase que consulta todas las unidades que se encuentren en una alcaldia
+    """
     serializer_class = AlcaldiaUnitSerializer
     pagination_class = Paginator
 
