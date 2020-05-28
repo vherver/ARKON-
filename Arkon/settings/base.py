@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4z$-c1zmag+8)o(7bjibrl)d-7=jv&tjz-vcrrk%+mg&$d5k#-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -71,18 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Arkon.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
